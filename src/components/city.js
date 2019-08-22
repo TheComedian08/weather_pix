@@ -1,29 +1,35 @@
 import React from 'react';
 import styled from 'styled-components';
-import { fetchWeather } from '../reducers/cityReducer';
 import { connect } from 'react-redux';
+import { fetchWeather } from '../actions';
 
 class City extends React.Component {
-  render() {
-    let input;
+   state = {
+      city: ''
+    }
 
+    onChange = e =>{
+      this.setState({
+        city: e.target.value
+      })
+    }
+
+    onSubmit = e =>{
+      e.preventDefault()
+      this.props.getCity(this.state.city)
+      this.setState({city: ''})
+    }
+  render() {
     return (
       <Wrapper>
         <form
-          onSubmit={e => {
-            e.preventDefault();
-            if (!input.value.trim()) {
-              return;
-            }
-            this.props.GetCity(input.value.toLowerCase());
-            input.value = '';
-            
-          }}
+          onSubmit = {e=>this.onSubmit(e)}
         >
           <input
             type='text'
             placeholder='Type your city'
-            ref={node => (input = node)}
+            value={this.state.city}
+            onChange = {(e)=>this.onChange(e)}
           />
           <input type='submit'/>
         </form>
@@ -31,14 +37,15 @@ class City extends React.Component {
     );
   }
 }
+
 const mapStateToProps = store => {
   return {};
 };
-
 const mapDispatchToProps = dispatch => {
   return {
-        GetCity: (text) => {
-            return dispatch(fetchWeather(text))}
+    getCity: (city) => {
+      return dispatch(fetchWeather(city))
+    }
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(City);

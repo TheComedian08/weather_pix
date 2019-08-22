@@ -1,0 +1,10 @@
+export const WEATHER_REQUEST = 'WEATHER_REQUEST'
+export const WEATHER_ERROR = 'WEATHER_SUCCESS'
+export const GET_WEATHER = 'GET_WEATHER'
+export const FETCH_WEATHER = 'FETCH_WEATHER'
+export const LOADING_WEATHER ='LOADING_WEATHER'
+export const GET_CITY = 'GET_CITY'
+
+
+//API KEY
+export const key = '8e9d55d0a1260f2a1d8ee7e6dc439796'
